@@ -47,6 +47,24 @@ class _HomescreenState extends State<Homescreen> {
           )
         ],
       ),
+      body: Column(children: [
+        Container(
+          height: 5,
+          color: Color(0xFFEEEEEE),
+        ),
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundColor: Colors.yellow,
+          ),
+          title: Text(
+            "Sarı",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text("Coder Sariii",style: TextStyle(fontSize: 13),),
+          trailing: Text("18:04"),
+        ),
+      ]),
     );
   }
 }
