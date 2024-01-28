@@ -1,3 +1,5 @@
+import 'package:chat_app/CustomUI/CustomCard.dart';
+import 'package:chat_app/Model/ChatModel.dart';
 import 'package:flutter/material.dart';
 
 class Homescreen extends StatefulWidget {
@@ -8,6 +10,26 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+  List<ChatModel> chat = [
+    ChatModel(
+        name: "Sari",
+        icon: "icon",
+        isGroup: false,
+        time: "18.04",
+        currentMessage: "dc gel"),
+    ChatModel(
+        name: "Eynallı",
+        icon: "icon",
+        isGroup: false,
+        time: "04.45",
+        currentMessage: "bilet buldummm"),
+    ChatModel(
+        name: "Neva",
+        icon: "icon",
+        isGroup: false,
+        time: "07.50",
+        currentMessage: "yurdun önüne geldim"),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,17 +74,11 @@ class _HomescreenState extends State<Homescreen> {
           height: 5,
           color: Color(0xFFEEEEEE),
         ),
-        ListTile(
-          leading: CircleAvatar(
-            radius: 25,
-            backgroundColor: Colors.yellow,
+        Expanded(
+          child: ListView.builder(
+            itemCount: chat.length,
+            itemBuilder: (context, index) => CustomCard(chatModel: chat[index]),
           ),
-          title: Text(
-            "Sarı",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          subtitle: Text("Coder Sariii",style: TextStyle(fontSize: 13),),
-          trailing: Text("18:04"),
         ),
       ]),
     );
