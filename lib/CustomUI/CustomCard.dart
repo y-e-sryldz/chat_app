@@ -1,8 +1,12 @@
 import 'package:chat_app/Model/ChatModel.dart';
+import 'package:chat_app/Screens/IndividualPage.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
-  CustomCard({super.key, required this.chatModel,});
+  CustomCard({
+    super.key,
+    required this.chatModel,
+  });
   final ChatModel chatModel;
 
   @override
@@ -10,15 +14,22 @@ class CustomCard extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => IndividualPage(
+                          chatModel: chatModel,
+                        )));
+          },
           child: ListTile(
             leading: CircleAvatar(
               radius: 25,
-              backgroundColor: Colors.yellow,
+              child: Text(chatModel.icon),
             ),
             title: Text(
               chatModel.name,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
               chatModel.currentMessage,

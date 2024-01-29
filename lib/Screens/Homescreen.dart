@@ -13,37 +13,37 @@ class _HomescreenState extends State<Homescreen> {
   List<ChatModel> chat = [
     ChatModel(
         name: "Sari",
-        icon: "icon",
+        icon: "sari",
         isGroup: false,
         time: "18.04",
         currentMessage: "dc gel"),
     ChatModel(
         name: "Eynallı",
-        icon: "icon",
+        icon: "eyn",
         isGroup: false,
         time: "04.45",
         currentMessage: "bilet buldummm"),
     ChatModel(
         name: "Neva",
-        icon: "icon",
+        icon: "neva",
         isGroup: false,
         time: "07.50",
         currentMessage: "yurdun önüne geldim"),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
         title: SizedBox(
-          height: 50,
+          height: 42,
           child: TextField(
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              suffixIcon: Icon(Icons.clear),
+              suffixIcon: Icon(Icons.search),
               labelText: 'Search',
               border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
             ),
           ),
         ),
