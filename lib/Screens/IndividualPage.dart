@@ -167,13 +167,14 @@ class _IndividualPageState extends State<IndividualPage> {
       child: Card(
         margin: EdgeInsets.all(15),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconCreation(Icons.insert_drive_file, Colors.blue, "Document"),
+                  IconCreation(
+                      Icons.insert_drive_file, Colors.blue, "Document"),
                   SizedBox(
                     width: 40,
                   ),
@@ -184,7 +185,9 @@ class _IndividualPageState extends State<IndividualPage> {
                   IconCreation(Icons.insert_photo, Colors.purple, "Gallery"),
                 ],
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -196,7 +199,7 @@ class _IndividualPageState extends State<IndividualPage> {
                   SizedBox(
                     width: 40,
                   ),
-                  IconCreation(Icons.person, Colors.blue, "Contact"),
+                  IconCreation(Icons.person, Colors.teal, "Contact"),
                 ],
               ),
             ],
@@ -207,20 +210,25 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   Widget IconCreation(IconData icon, Color color, String text) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 30,
-          backgroundColor: color,
-          child: Icon(
-            icon,
-            size: 29,
-            color: Colors.white,
+    return InkWell(
+      onTap: () {},
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 30,
+            backgroundColor: color,
+            child: Icon(
+              icon,
+              size: 29,
+              color: Colors.white,
+            ),
           ),
-        ),
-        SizedBox(height: 5,),
-        Text(text),
-      ],
+          SizedBox(
+            height: 5,
+          ),
+          Text(text),
+        ],
+      ),
     );
   }
 }

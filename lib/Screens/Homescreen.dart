@@ -1,5 +1,6 @@
 import 'package:chat_app/CustomUI/CustomCard.dart';
 import 'package:chat_app/Model/ChatModel.dart';
+import 'package:chat_app/Screens/SelectContact.dart';
 import 'package:flutter/material.dart';
 
 class Homescreen extends StatefulWidget {
@@ -16,19 +17,22 @@ class _HomescreenState extends State<Homescreen> {
         icon: "sari",
         isGroup: false,
         time: "18.04",
-        currentMessage: "dc gel"),
+        currentMessage: "dc gel",
+        status: ""),
     ChatModel(
         name: "Eynallı",
         icon: "eyn",
         isGroup: false,
         time: "04.45",
-        currentMessage: "bilet buldummm"),
+        currentMessage: "bilet buldummm",
+        status: ""),
     ChatModel(
         name: "Neva",
         icon: "neva",
         isGroup: false,
         time: "07.50",
-        currentMessage: "yurdun önüne geldim"),
+        currentMessage: "yurdun önüne geldim",
+        status: ""),
   ];
 
   @override
@@ -57,7 +61,10 @@ class _HomescreenState extends State<Homescreen> {
         leadingWidth: 78,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => SelectContact()));
+            },
             icon: CircleAvatar(
               backgroundColor: Colors.red,
               child: Icon(
