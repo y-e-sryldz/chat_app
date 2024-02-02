@@ -13,26 +13,26 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   List<ChatModel> chat = [
     ChatModel(
-        name: "Sari",
-        icon: "sari",
-        isGroup: false,
-        time: "18.04",
-        currentMessage: "dc gel",
-        status: ""),
+      name: "Sari",
+      icon: "sari",
+      isGroup: false,
+      time: "18.04",
+      currentMessage: "dc gel",
+    ),
     ChatModel(
-        name: "Eynallı",
-        icon: "eyn",
-        isGroup: false,
-        time: "04.45",
-        currentMessage: "bilet buldummm",
-        status: ""),
+      name: "Eynallı",
+      icon: "eyn",
+      isGroup: false,
+      time: "04.45",
+      currentMessage: "bilet buldummm",
+    ),
     ChatModel(
-        name: "Neva",
-        icon: "neva",
-        isGroup: false,
-        time: "07.50",
-        currentMessage: "yurdun önüne geldim",
-        status: ""),
+      name: "Neva",
+      icon: "neva",
+      isGroup: false,
+      time: "07.50",
+      currentMessage: "yurdun önüne geldim",
+    ),
   ];
 
   @override
