@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-List<CameraDescription> cameras;
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen.CameraScreen({super.key});
@@ -19,7 +18,6 @@ class _CameraScreenState extends State<CameraScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _cameraController = CameraController(cameras[0], ResolutionPreset.high);
     cameraValue = _cameraController.initialize();
   }
 

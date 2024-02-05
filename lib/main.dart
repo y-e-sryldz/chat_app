@@ -1,10 +1,7 @@
-import 'package:camera/camera.dart';
-import 'package:chat_app/Screens/CameraScreen.dart';
 import 'package:chat_app/Screens/Homescreen.dart';
 import 'package:flutter/material.dart';
 
 Future <void> main() async {
-  cameras = await availableCameras();
   runApp(const MyApp());
 }
 
