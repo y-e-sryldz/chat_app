@@ -1,3 +1,5 @@
+import 'package:chat_app/CustomUI/OwnMessageCard.dart';
+import 'package:chat_app/CustomUI/ReplyCard.dart';
 import 'package:chat_app/Model/ChatModel.dart';
 import 'package:flutter/material.dart';
 
@@ -103,7 +105,38 @@ class _IndividualPageState extends State<IndividualPage> {
               color: Color(0xFFEEEEEE),
             ),
           ),
-          ListView(),
+          Container(
+            height: MediaQuery.of(context).size.height - 160,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+                OwnMessageCard(),
+                ReplyCard(),
+              ],
+            ),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Row(
