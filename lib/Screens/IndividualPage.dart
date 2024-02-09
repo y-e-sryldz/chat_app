@@ -1,6 +1,7 @@
 import 'package:chat_app/CustomUI/OwnMessageCard.dart';
 import 'package:chat_app/CustomUI/ReplyCard.dart';
 import 'package:chat_app/Model/ChatModel.dart';
+import 'package:chat_app/Pages/MessageModel.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -17,6 +18,7 @@ class IndividualPage extends StatefulWidget {
 class _IndividualPageState extends State<IndividualPage> {
   late IO.Socket socket;
   bool sendButton = false;
+  List<MessageModel> messages = [];
 
   TextEditingController _controller = TextEditingController();
 
@@ -27,19 +29,35 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   void connect() {
-    socket = IO.io("http://192.168.1.76:5000", <String, dynamic>{
+    socket = IO.io("http://192.168.1.76:5001", <String, dynamic>{
       "transport": ["websocket"],
       "autoConnect": false,
     });
     socket.connect();
     socket.emit("signin", widget.sourchat.id);
-    socket.onConnect((data) => print("Connected"));
+    socket.onConnect((data) {
+      print("Connected");
+      socket.on("message", (msg) {
+        print(msg);
+        setMessage("destinaation", msg["message"]);
+      });
+    });
     print(socket.connected);
   }
 
   void sendMessage(String message, int sourceId, int targetId) {
+    setMessage("source", message);
     socket.emit(message,
         {"message": message, "sourceId": sourceId, "targetId": targetId});
+  }
+
+  void setMessage(String type, String message) {
+    MessageModel messageModel = MessageModel(message: message, type: type);
+    setState(() {
+      setState(() {
+        messages.add(messageModel);
+      });
+    });
   }
 
   @override
@@ -135,34 +153,18 @@ class _IndividualPageState extends State<IndividualPage> {
           ),
           Container(
             height: MediaQuery.of(context).size.height - 160,
-            child: ListView(
+            child: ListView.builder(
               shrinkWrap: true,
-              children: [
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-                OwnMessageCard(),
-                ReplyCard(),
-              ],
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                if (messages[index].type == "source") {
+                  return OwnMessageCard(
+                    message: messages[index].message,
+                  );
+                } else {
+                  return ReplyCard(message: messages[index].message);
+                }
+              },
             ),
           ),
           Align(

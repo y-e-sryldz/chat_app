@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late ChatModel sourceChat;
+  
   List<ChatModel> chatmodels = [
     ChatModel(
       id: 1,
@@ -39,6 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
       currentMessage: "yurdun önüne geldim",
     ),
   ];
+   @override
+  void initState() {
+    super.initState();
+    sourceChat = chatmodels.first;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
