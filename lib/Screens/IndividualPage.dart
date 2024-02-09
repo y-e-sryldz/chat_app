@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
-  const IndividualPage({super.key, required this.chatModel});
+  const IndividualPage(
+      {super.key, required this.chatModel, required this.sourchat});
   final ChatModel chatModel;
+  final ChatModel sourchat;
 
   @override
   State<IndividualPage> createState() => _IndividualPageState();
@@ -14,6 +16,9 @@ class IndividualPage extends StatefulWidget {
 
 class _IndividualPageState extends State<IndividualPage> {
   late IO.Socket socket;
+  bool sendButton = false;
+
+  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -27,15 +32,21 @@ class _IndividualPageState extends State<IndividualPage> {
       "autoConnect": false,
     });
     socket.connect();
-    socket.emit("/test", "Hello world");
+    socket.emit("signin", widget.sourchat.id);
     socket.onConnect((data) => print("Connected"));
     print(socket.connected);
+  }
+
+  void sendMessage(String message, int sourceId, int targetId) {
+    socket.emit(message,
+        {"message": message, "sourceId": sourceId, "targetId": targetId});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 70,
         leadingWidth: 88,
         titleSpacing: 10,
         leading: Row(
@@ -118,12 +129,9 @@ class _IndividualPageState extends State<IndividualPage> {
         height: MediaQuery.of(context).size.height - 100,
         width: MediaQuery.of(context).size.width,
         child: Stack(children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 15),
-            child: Container(
-              height: 5,
-              color: Color(0xFFEEEEEE),
-            ),
+          Container(
+            height: 5,
+            color: Color(0xFFEEEEEE),
           ),
           Container(
             height: MediaQuery.of(context).size.height - 160,
@@ -171,7 +179,20 @@ class _IndividualPageState extends State<IndividualPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 18),
                       child: TextFormField(
+                        controller: _controller,
                         textAlignVertical: TextAlignVertical.center,
+                        keyboardType: TextInputType.multiline,
+                        onChanged: (value) {
+                          if (value.length > 0) {
+                            setState(() {
+                              sendButton = true;
+                            });
+                          } else {
+                            setState(() {
+                              sendButton = false;
+                            });
+                          }
+                        },
                         decoration: InputDecoration(
                           hintText: "Type a message",
                           border: InputBorder.none,
@@ -202,7 +223,18 @@ class _IndividualPageState extends State<IndividualPage> {
                   child: CircleAvatar(
                     backgroundColor: Color(0xFFFF4A09),
                     radius: 23,
-                    child: IconButton(onPressed: () {}, icon: Icon(Icons.mic)),
+                    child: IconButton(
+                        onPressed: () {
+                          if (sendButton) {
+                            sendMessage(_controller.text, widget.sourchat.id,
+                                widget.chatModel.id);
+                            _controller.clear();
+                          }
+                        },
+                        icon: Icon(
+                          sendButton ? Icons.send : Icons.mic,
+                          color: Colors.white,
+                        )),
                   ),
                 ),
               ],

@@ -4,8 +4,10 @@ import 'package:chat_app/Screens/SelectContact.dart';
 import 'package:flutter/material.dart';
 
 class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
-
+  const Homescreen(
+      {super.key, required this.chatmodels, required this.sourchat});
+  final List<ChatModel> chatmodels;
+  final ChatModel sourchat;
   @override
   State<Homescreen> createState() => _HomescreenState();
 }
@@ -18,6 +20,7 @@ class _HomescreenState extends State<Homescreen> {
       isGroup: false,
       time: "18.04",
       currentMessage: "dc gel",
+      id: 1,
     ),
     ChatModel(
       name: "Eynallı",
@@ -25,6 +28,7 @@ class _HomescreenState extends State<Homescreen> {
       isGroup: false,
       time: "04.45",
       currentMessage: "bilet buldummm",
+      id: 2,
     ),
     ChatModel(
       name: "Neva",
@@ -32,6 +36,7 @@ class _HomescreenState extends State<Homescreen> {
       isGroup: false,
       time: "07.50",
       currentMessage: "yurdun önüne geldim",
+      id: 3,
     ),
   ];
 
@@ -84,7 +89,7 @@ class _HomescreenState extends State<Homescreen> {
         Expanded(
           child: ListView.builder(
             itemCount: chat.length,
-            itemBuilder: (context, index) => CustomCard(chatModel: chat[index]),
+            itemBuilder: (context, index) => CustomCard(chatModel: chat[index],sourchat: widget.sourchat,),
           ),
         ),
       ]),

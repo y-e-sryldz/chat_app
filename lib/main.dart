@@ -1,4 +1,5 @@
 import 'package:chat_app/Screens/Homescreen.dart';
+import 'package:chat_app/Screens/LoginScreen.dart';
 import 'package:flutter/material.dart';
 
 Future <void> main() async {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: Homescreen(),
+      home: LoginScreen(),
     );
   }
 }

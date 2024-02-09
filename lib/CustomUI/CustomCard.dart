@@ -6,8 +6,10 @@ class CustomCard extends StatelessWidget {
   CustomCard({
     super.key,
     required this.chatModel,
+    required this.sourchat,
   });
   final ChatModel chatModel;
+  final ChatModel sourchat;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class CustomCard extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => IndividualPage(
                           chatModel: chatModel,
+                          sourchat: sourchat,
                         )));
           },
           child: ListTile(
