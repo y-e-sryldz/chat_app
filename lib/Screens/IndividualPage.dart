@@ -29,7 +29,7 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   void connect() {
-    socket = IO.io("http://192.168.1.76:5001", <String, dynamic>{
+    socket = IO.io("http://192.168.1.76:3000", <String, dynamic>{
       "transport": ["websocket"],
       "autoConnect": false,
     });
@@ -42,11 +42,14 @@ class _IndividualPageState extends State<IndividualPage> {
         setMessage("destinaation", msg["message"]);
       });
     });
+    socket.onConnectError((data) => print("HATAAAA $data"));
     print(socket.connected);
   }
 
   void sendMessage(String message, int sourceId, int targetId) {
     setMessage("source", message);
+    print(
+        "sendMessage fonksiyonu çağrıldı. Mesaj: $message, SourceID: $sourceId, TargetID: $targetId");
     socket.emit(message,
         {"message": message, "sourceId": sourceId, "targetId": targetId});
   }
@@ -227,6 +230,7 @@ class _IndividualPageState extends State<IndividualPage> {
                     radius: 23,
                     child: IconButton(
                         onPressed: () {
+                          print(sendButton);
                           if (sendButton) {
                             sendMessage(_controller.text, widget.sourchat.id,
                                 widget.chatModel.id);
