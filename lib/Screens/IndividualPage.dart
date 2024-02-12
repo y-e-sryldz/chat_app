@@ -29,7 +29,7 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   void connect() {
-    socket = IO.io("http://192.168.1.76:3000", <String, dynamic>{
+    socket = IO.io("http://localhost:3000", <String, dynamic>{
       "transport": ["websocket"],
       "autoConnect": false,
     });
